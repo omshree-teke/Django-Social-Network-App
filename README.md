@@ -1,69 +1,71 @@
-# Django Social Network
+# Django Social Network App
 
-A social media web-application with Django.
+A full-featured social media web app built with Django — includes real-time chat, video calls, friend system, blog posts, and notifications.
 
-## Features :
+## Features
 
-<li>Sign Up, Login, OAuth 2.0(Google, Github), Logout, Forgot Password</li>
-<li>Public Profile view</li>
-<li>Create, Edit, Delete Posts with customized text, pictures and links</li>
-<li>Like, Comment / Reply, Save and Search posts</li>
-<li>Follow and Unfollow users to view their posts</li>
-<li>Friend Request</li>
-<li>Notifications</li>
-<li>Chats using websockets</li>
-<li>Video Calls</li>
+- 📝 Blog posts with rich text editor (CKEditor 5)
+- 💬 Real-time chat using Django Channels & WebSockets
+- 📹 Video calls using Agora
+- 👥 Friend request system
+- 🔔 Notifications
+- 🔐 Authentication with email & social login (Google, GitHub)
+- 👤 User profiles with avatar
+- 📱 Responsive design with Bootstrap 4
 
-## Demo (Not up-to-date)
+## Tech Stack
 
-
-https://user-images.githubusercontent.com/64803043/118666705-02735600-b811-11eb-80f9-445bbe6e55c9.mp4
-
-
-<a href="./demo/demo1.mp4">Video Link</a>
-
-## Adding env variables
-
-- Add env variables to ".test.env" and rename it to ".env"
-
-- Add GOOGLE_RECAPTCHA_SECRET_KEY to both .env and the file mentioned below https://github.com/Ronik22/Django_Social_Network_App/blob/main/users/templates/users/register.html#L45
-
-- Add agora app_id to .env and to https://github.com/Ronik22/Django_Social_Network_App/blob/main/blog/static/blog/js/streams.js#L2
+- **Backend:** Django 4.2
+- **Frontend:** Bootstrap 4, JavaScript
+- **Real-time:** Django Channels, Daphne, WebSockets
+- **Database:** SQLite (dev) / PostgreSQL (prod)
+- **Auth:** Django Allauth
+- **Editor:** CKEditor 5
+- **Video:** Agora RTC
+- **Static files:** Whitenoise
 
 ## Installation
 
+### 1. Clone the repository
 ```bash
-    $ python -m venv venv
-    $ source venv/Scripts/activate
-    (venv) pip install -r requirements.txt
-    (venv) cd Django_Social_Network_App
-    (venv) python manage.py makemigrations
-    (venv) python manage.py migrate
-    (venv) python manage.py createsuperuser
-    (venv) python manage.py runserver
+git clone https://github.com/omshree-teke/Django-Social-Network-App.git
+cd Django-Social-Network-App
 ```
 
-
-## Add django-allauth config
-
-https://django-allauth.readthedocs.io/en/latest/installation.html#post-installation
-
-## Others
-
-- To use other DB edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L107
-- To use other providers edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L205
-- To use redis instead edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L197
-
-## Running Tests
-
-To run tests, run the following command
-
+### 2. Create and activate virtual environment
 ```bash
-  python manage.py test
+python -m venv venv
+venv\Scripts\activate  # Windows
 ```
 
-## Deploy to Heroku
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
-https://devcenter.heroku.com/articles/getting-started-with-python
+### 4. Create `.env` file in root directory
+```
+SECRET_KEY=your_secret_key
+DEBUG=True
+EMAIL_PORT=587
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password
+GOOGLE_RECAPTCHA_SECRET_KEY=your_recaptcha_key
+```
 
-https://realpython.com/django-hosting-on-heroku/
+### 5. Run migrations
+```bash
+python manage.py migrate
+```
+
+### 6. Create superuser
+```bash
+python manage.py createsuperuser
+```
+
+### 7. Run the server
+```bash
+python manage.py runserver
+```
+
+Visit **http://127.0.0.1:8000**
