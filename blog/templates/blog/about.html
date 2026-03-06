@@ -5,12 +5,90 @@
 {% block content %}
 
 <div class="col-md-8 m-auto">
+
+    <!-- About the Project -->
+    <div class="content-section">
+        <h2>About WordFlow ✨</h2>
+        <hr>
+        <p>WordFlow is a social platform built for writers, thinkers, and curious minds. Share your thoughts, connect with like-minded people, chat in real time, and stay updated with notifications.</p>
+    </div>
+
+    <!-- Features -->
+    <div class="content-section mt-3">
+        <h4>Features</h4>
+        <hr>
+        <div class="row text-center">
+            <div class="col-md-4 mb-3">
+                <h2>📝</h2>
+                <h6>Write & Share</h6>
+                <p class="text-muted">Create posts and share your ideas with the world.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h2>💬</h2>
+                <h6>Real-time Chat</h6>
+                <p class="text-muted">Chat instantly with your friends using WebSockets.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h2>🔔</h2>
+                <h6>Notifications</h6>
+                <p class="text-muted">Stay updated with likes, comments and friend requests.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h2>👥</h2>
+                <h6>Friend System</h6>
+                <p class="text-muted">Send friend requests and build your network.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h2>📹</h2>
+                <h6>Video Calls</h6>
+                <p class="text-muted">Connect face to face with your friends.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h2>🔍</h2>
+                <h6>Search</h6>
+                <p class="text-muted">Find posts and people easily with search.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="content-section mt-3">
+        <h4>Tech Stack</h4>
+        <hr>
+        <p>🐍 Python &nbsp;|&nbsp; 🌐 Django &nbsp;|&nbsp; ⚡ Django Channels &nbsp;|&nbsp; 🔌 WebSockets &nbsp;|&nbsp; 🗄️ SQLite &nbsp;|&nbsp; 🎨 Bootstrap</p>
+    </div>
+
+    {% comment %} <!-- Developer -->
+    <div class="content-section mt-3 mb-3">
+        <h4>Developer</h4>
+        <hr>
+        <p>Made with ❤️ by <strong>Omshree Teke</strong> — a passionate fresher developer who loves building real-world projects with Django. ✨</p>
+        <a href="https://github.com/omshree-teke" target="_blank" class="btn btn-dark btn-sm">GitHub</a>
+    </div> {% endcomment %}
+
+</div>
+
+{% endblock %}
+
+
+
+
+{% comment %} {% extends "blog/base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<div class="col-md-8 m-auto">
     <div class="content-section">
         <h1>About page</h1>
         <br>
-        <p>Made with &#128150; by Ronik Bhattacharjee &#9996;</p>
+        <p>Made with &#128150; by Omshree Teke &#9996;</p>
     </div>
 </div>
 
 
-{% endblock %}
+{% endblock %} {% endcomment %}
+
+
+

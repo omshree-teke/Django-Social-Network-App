@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 body {
-    background: #f7f7f7;
+    background: #ede9fe;
     color: #333333;
     margin-top: 5rem;
     scroll-behavior: smooth;
@@ -16,7 +16,7 @@ body {
   }
   
   .bg-steel {
-    background: #6633FF;
+    background: #6d28d9;
     /* box-shadow: 0 0 6px rgba(0,0,0,0.3); */
   }
   
@@ -363,3 +363,9 @@ body {
   padding:5px 10px;
   font-size:20px;
 }
+
+
+
+
+
+

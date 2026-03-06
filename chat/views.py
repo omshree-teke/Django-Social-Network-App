@@ -58,7 +58,8 @@ def room(request, room_name, friend_id):
 
     context = {
         'old_chats':chats,
-        'my_name':request.user,
+        # 'my_name':request.user,
+        'my_name': request.user.username,  # ✅ pass string
         'friend_name':User.objects.get(pk=friend_id),
         'room_name': room_name
     }
