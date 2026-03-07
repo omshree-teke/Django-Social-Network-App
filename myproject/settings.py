@@ -287,3 +287,5 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
 
 
+
+# force rebuild
