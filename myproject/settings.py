@@ -284,7 +284,9 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = False
-    CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
+
+# This must be OUTSIDE the if block
+CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
 
 
 
