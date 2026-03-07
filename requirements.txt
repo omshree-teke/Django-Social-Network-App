@@ -1,8 +1,4 @@
-﻿<<<<<<< HEAD
-﻿agora_token_builder==1.0.0
-=======
-agora_token_builder==1.0.0
->>>>>>> 2191f4d5e82b91a65893845501c149bdded054f5
+﻿﻿agora_token_builder==1.0.0
 asgiref==3.11.1
 attrs==25.4.0
 autobahn==25.12.2
