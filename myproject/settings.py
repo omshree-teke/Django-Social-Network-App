@@ -287,6 +287,7 @@ if not DEBUG:
 
 # This must be OUTSIDE the if block
 CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
+print("CSRF_TRUSTED_ORIGINS:", CSRF_TRUSTED_ORIGINS)
 
 
 
