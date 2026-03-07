@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
+import dj_database_url
 
 # Loading ENV
 env_path = Path('.') / '.env'
@@ -33,7 +34,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # DEBUG = os.getenv("DEBUG")
 DEBUG = os.getenv("DEBUG") == "True"
 
-ALLOWED_HOSTS = ['*'] 
+# ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['web-production-68a96.up.railway.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -49,8 +51,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',           
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'cloudinary',                   
 
     'django_ckeditor_5',
     'allauth',
@@ -105,30 +109,22 @@ AUTHENTICATION_BACKENDS = [
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'socialNet',
-#         'USER': 'postgres',
-#         'PASSWORD': os.getenv("PGDB_PWD"),
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# change for deployment
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600
+    )
+}
 
 
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -196,10 +192,18 @@ MESSAGE_TAGS = {
 # ASGI_APPLICATION = "myproject.routing.application"
 ASGI_APPLICATION = "myproject.asgi.application"  # ✅
 
+# CHANNEL_LAYERS = {
+#     "default":{
+#         "BACKEND":"channels.layers.InMemoryChannelLayer"
+#     },
+# }
 CHANNEL_LAYERS = {
-    "default":{
-        "BACKEND":"channels.layers.InMemoryChannelLayer"
-    },
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.getenv("REDIS_URL", "redis://localhost:6379")],
+        },
+    }
 }
 
 SITE_ID = 2     # considering 2nd site in 'Sites' to be 127.0.0.1 (for dev)
@@ -265,3 +269,21 @@ CKEDITOR_5_CONFIGS = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    }
+
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
