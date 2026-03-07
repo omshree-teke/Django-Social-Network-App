@@ -283,7 +283,7 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
     CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
 
 
