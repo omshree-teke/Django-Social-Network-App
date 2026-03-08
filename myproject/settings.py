@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
 from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
 import dj_database_url
+from pathlib import Path
 
 # Loading ENV
 env_path = Path('.') / '.env'
@@ -34,8 +34,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # DEBUG = os.getenv("DEBUG")
 DEBUG = os.getenv("DEBUG") == "True"
 
-# ALLOWED_HOSTS = ['*'] 
-ALLOWED_HOSTS = ['web-production-68a96.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*'] 
+# ALLOWED_HOSTS = ['web-production-68a96.up.railway.app', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.up.railway.app"
+]
 
 
 # Application definition
@@ -117,9 +120,15 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 # change for deployment
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv("DATABASE_URL"),
+#         conn_max_age=600
+#     )
+# }
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
+        default='sqlite:///db.sqlite3',
         conn_max_age=600
     )
 }
@@ -286,8 +295,8 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = False
 
 # This must be OUTSIDE the if block
-CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
-print("CSRF_TRUSTED_ORIGINS:", CSRF_TRUSTED_ORIGINS)
+# CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
+
 
 
 
