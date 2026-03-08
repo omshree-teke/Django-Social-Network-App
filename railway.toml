@@ -1,2 +1,2 @@
 [deploy]
-startCommand = "python manage.py migrate && daphne myproject.asgi:application --port $PORT --bind 0.0.0.0 -v2"
+startCommand = "python manage.py collectstatic --no-input && python manage.py migrate && daphne myproject.asgi:application --port $PORT --bind 0.0.0.0 -v2"
