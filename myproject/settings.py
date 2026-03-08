@@ -35,10 +35,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = ['*'] 
-# ALLOWED_HOSTS = ['web-production-68a96.up.railway.app', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.up.railway.app"
-]
+CSRF_TRUSTED_ORIGINS = ['https://web-production-68a96.up.railway.app']
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://*.up.railway.app"
+# ]
 
 
 # Application definition
@@ -128,7 +128,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # }
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+        default=os.getenv("DATABASE_URL"),  # ✅
         conn_max_age=600
     )
 }
