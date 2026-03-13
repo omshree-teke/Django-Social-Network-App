@@ -35,7 +35,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = ['*'] 
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip() 
+    for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,http://127.0.0.1:8000").split(",")
+    if origin.strip()
+]
 
 # CSRF_TRUSTED_ORIGINS = [
 #     "https://*.up.railway.app"
@@ -129,7 +133,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # }
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),  # ✅
+        default=os.getenv("DATABASE_URL", "sqlite:///db.sqlite3"),
         conn_max_age=600
     )
 }
@@ -165,6 +169,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -184,7 +190,7 @@ LOGIN_URL = 'account_login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')     # environment variable containing username
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')  # environment variable containing password
@@ -216,7 +222,7 @@ CHANNEL_LAYERS = {
     }
 }
 
-SITE_ID = 2     # considering 2nd site in 'Sites' to be 127.0.0.1 (for dev)
+SITE_ID = int(os.getenv("SITE_ID", 1))   
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

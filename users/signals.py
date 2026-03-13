@@ -49,7 +49,8 @@ from friend.models import FriendList
 # 🔹 Create Profile when User is created
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-    if created:
+    # if created:
+    if created and not instance.is_superuser:
         Profile.objects.create(user=instance)
 
 
@@ -62,7 +63,8 @@ def create_profile(sender, instance, created, **kwargs):
 # 🔹 Create FriendList when User is created
 @receiver(post_save, sender=User)
 def create_friendlist(sender, instance, created, **kwargs):
-    if created:
+    # if created:
+    if created and not instance.is_superuser: 
         FriendList.objects.create(user=instance)
 
 
